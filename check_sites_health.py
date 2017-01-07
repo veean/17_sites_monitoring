@@ -18,8 +18,7 @@ def load_urls4check(path_file):
 
 def is_server_respond_with_200(url):
     ok_status = 200
-    if requests.get(url).status_code is ok_status:
-        return True
+    return requests.get(url).status_code == ok_status
 
 
 def get_domain_expiration_date(domain_name):
@@ -37,11 +36,9 @@ def paid_at_least_a_month(expiration_date):
     expiration_prediction = datetime.today() + timedelta(days=DAYS_TO_EXPIRE)
     if type(expiration_date) is list:
         for possible_unit in expiration_date:
-            if possible_unit > expiration_prediction:
-                return True
+            return possible_unit > expiration_prediction
     else:
-        if expiration_date > expiration_prediction:
-            return True
+        return expiration_date > expiration_prediction
 
 
 def complex_check(url_):
