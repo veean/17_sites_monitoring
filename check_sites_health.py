@@ -1,6 +1,7 @@
 import os
 import requests
 import whois
+import argparse
 from datetime import date, timedelta
 
 
@@ -22,8 +23,14 @@ def is_server_respond_with_200(url):
 
 
 def get_domain_expiration_date(domain_name):
-    info_request = whois.query(domain_name)
+    info_request = whois.whois(domain_name)
     return info_request.expiration_date
+
+
+def input_wrapper():
+    parser = argparse.ArgumentParser(description='Checking availability of urls list')
+    parser.add_argument('file', default='urls.txt', type=str, help='file with urls')
+    return parser.parse_args().file
 
 
 def paid_at_least_a_month(expiration_date):
@@ -33,4 +40,7 @@ def paid_at_least_a_month(expiration_date):
 
 
 if __name__ == '__main__':
-    pass
+    # print('Common, specify the urls to check by text file!')
+    urls = load_urls4check(input_wrapper())
+    if urls:
+        print()
