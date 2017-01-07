@@ -11,9 +11,6 @@
     $python check_sites_health.py urls.txt
     
     
-    http://yandex.ru has status OK and ... 
-    domain name paid at least a month forward . 
-     
     http://python.org has status OK and ... 
     domain name paid at least a month forward . 
      
